@@ -1,4 +1,5 @@
 const express = require("express");
+const { dbClient } = require("./db");
 
 const app = express();
 
