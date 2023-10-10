@@ -4,7 +4,7 @@ import { dbClient } from "./db.js";
 const app = express();
 
 app.get("/", (req, res) => {
-    res.send("hi");
+    res.send("Map REST API.");
 });
 
 app.listen(5000, async () => {
