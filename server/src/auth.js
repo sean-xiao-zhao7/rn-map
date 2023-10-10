@@ -1,8 +1,8 @@
 import express from "express";
 import { dbClient } from "./db.js";
 
-const router = express.Router();
+const authRoutes = express.Router();
 
-router.post("/register", (req, res) => {});
+authRoutes.post("/register", (req, res) => {});
 
-module.exports = router;
+export default authRoutes;

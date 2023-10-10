@@ -1,7 +1,9 @@
 import express from "express";
 import { dbClient } from "./db.js";
+import authRoutes from "./auth.js";
 
 const app = express();
+app.use(authRoutes);
 
 app.get("/", (req, res) => {
     res.send("Map REST API.");
