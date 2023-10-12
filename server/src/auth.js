@@ -15,8 +15,13 @@ authRoutes.post("/register", async (req, res) => {
         res.status = 200;
         res.send("User added.");
     } catch (error) {
-        console.log(error);
-        res.sendStatus(500);
+        if (error.message.includes("is required")) {
+            res.status = 402;
+            res.send("Some required fields are empty.");
+        } else {
+            res.status = 500;
+            res.send("Server error.");
+        }
     }
 });
 
