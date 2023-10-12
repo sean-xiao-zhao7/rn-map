@@ -4,7 +4,7 @@ import { dbClient } from "./db.js";
 const authRoutes = express.Router();
 
 authRoutes.post("/register", (req, res) => {
-    console.log(req);
+    res.sendStatus(200);
 });
 
 export default authRoutes;
