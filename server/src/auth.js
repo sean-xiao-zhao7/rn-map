@@ -5,7 +5,6 @@ const authRoutes = express.Router();
 
 authRoutes.post("/register", async (req, res) => {
     try {
-        console.log(req.body);
         const email = req.body.email;
         const password = req.body.password;
         const firstname = req.body.firstname;
