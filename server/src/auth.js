@@ -57,7 +57,7 @@ authRoutes.post("/login", async (req, res) => {
                 console.log(err);
                 return res.sendStatus(422);
             }
-
+            // console.log(isMatch);
             if (!isMatch) {
                 res.status(401);
                 return res.send("Incorrect password.");
