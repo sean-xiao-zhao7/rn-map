@@ -44,19 +44,21 @@ authRoutes.post("/register", async (req, res) => {
 
 authRoutes.post("/login", async (req, res) => {
     try {
-        // add user
         const email = req.body.email;
         const password = req.body.password;
 
-        const query = User.where({ email: email });
-        const user = await query.findOne();
+        const user = await User.findOne({ email: email });
+        if (!user) {
+            return res.sendStatus(404);
+        }
 
-        bcrypt.hash(password, user.salt, (err, hash) => {
+        bcrypt.compare(password, user.password, (err, isMatch) => {
             if (err) {
-                return next(err);
+                console.log(err);
+                return res.sendStatus(422);
             }
 
-            if (hash !== user.password) {
+            if (!isMatch) {
                 res.status(401);
                 return res.send("Incorrect password.");
             } else {
