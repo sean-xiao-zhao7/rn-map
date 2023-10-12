@@ -10,11 +10,12 @@ authRoutes.post("/register", async (req, res) => {
         const password = req.body.password;
         const firstname = req.body.firstname;
         const lastname = req.body.lastname;
-        const newUser = new User(email, password, firstname, lastname);
+        const newUser = new User({ email, password, firstname, lastname });
         await newUser.save();
         res.status = 200;
         res.send("User added.");
     } catch (error) {
+        // console.log(error);
         if (error.message.includes("is required")) {
             res.status = 402;
             res.send("Some required fields are empty.");
