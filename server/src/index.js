@@ -1,8 +1,11 @@
 import express from "express";
+import bodyParser from "body-parser";
+
 import { dbClient } from "./db.js";
 import authRoutes from "./auth.js";
 
 const app = express();
+app.use(bodyParser.json());
 app.use(authRoutes);
 
 app.get("/", (req, res) => {
