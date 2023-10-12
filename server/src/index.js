@@ -14,6 +14,7 @@ app.use(bodyParser.json());
 app.use(authRoutes);
 
 app.get("/", requireAuthMiddleware, (req, res) => {
+    // console.log(req.user);
     res.send("Maps REST API.");
 });
 

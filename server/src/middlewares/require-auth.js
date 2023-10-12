@@ -18,11 +18,11 @@ export const requireAuthMiddleware = (req, res, next) => {
         const { userId } = payload;
         try {
             const user = await User.findById(userId);
+            req.user = user;
+            next();
         } catch (err) {
             console.log(err.message);
             return res.sendStatus(401);
         }
-
-        return res.sendStatus(200);
     });
 };
