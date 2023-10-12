@@ -1,5 +1,4 @@
 import express from "express";
-import { dbClient } from "./db.js";
 
 const authRoutes = express.Router();
 
