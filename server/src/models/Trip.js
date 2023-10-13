@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { coordinateSchema } from "./Coordinate.js";
 
 const { Schema } = mongoose;
 
@@ -9,7 +10,7 @@ const tripSchema = new Schema({
         required: true,
     },
     name: { type: String, default: "", required: true },
-    locations: [coordinateSchema],
+    coordinates: [coordinateSchema],
 });
 
 export const Trip = mongoose.model("Trip", tripSchema);

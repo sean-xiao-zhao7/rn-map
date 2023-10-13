@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
-const coordinateSchema = new Schema({
+export const coordinateSchema = new Schema({
     tripId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Trip",
@@ -10,6 +10,7 @@ const coordinateSchema = new Schema({
     },
     lat: { type: Number, required: true },
     long: { type: Number, required: true },
+    timestamp: Number,
 });
 
 export const Coordinate = mongoose.model("Coordinate", coordinateSchema);
