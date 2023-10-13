@@ -1,11 +1,13 @@
 import express from "express";
 
+import { requireAuthMiddleware } from "./middlewares/require-auth.js";
+
 import { Coordinate } from "./models/Coordinate.js";
 import { Trip } from "./models/Trip.js";
 
 const tripsRoutes = express.Router();
 
-tripsRoutes.post("/add-trip", async (req, res) => {
+tripsRoutes.post("/add-trip", requireAuthMiddleware, async (req, res) => {
     try {
         const name = req.body.name;
         const newTrip = new Trip({ userId: req.user._id, name });
@@ -35,7 +37,7 @@ tripsRoutes.post("/add-trip", async (req, res) => {
     }
 });
 
-tripsRoutes.post("/add-coordinate", async (req, res) => {
+tripsRoutes.post("/add-coordinate", requireAuthMiddleware, async (req, res) => {
     try {
         const lat = req.body.lat;
         const long = req.body.long;
