@@ -1,37 +1,33 @@
 import express from "express";
 
-import { User } from "./models/User.js";
+import { Coordinate } from "./models/Coordinate.js";
+import { Trip } from "./models/Trip.js";
 
 const tripsRoutes = express.Router();
 
-tripsRoutes.post("/start", async (req, res) => {
+tripsRoutes.post("/add-trip", async (req, res) => {
     try {
-        // add user
-        const email = req.body.email;
-        const password = req.body.password;
-        const firstname = req.body.firstname;
-        const lastname = req.body.lastname;
-        const newUser = new User({ email, password, firstname, lastname });
-        await newUser.save();
+        const name = req.body.name;
+        const newTrip = new Trip({ userId: req.user._id, name });
+        await newTrip.save();
 
-        // return jwt
-        const newToken = jwt.sign(
-            {
-                userId: newUser._id,
-            },
-            jwta
-        );
+        const lat = req.body.lat;
+        const long = req.body.long;
+        const newCoordinate = new Coordinate({
+            tripId: newTrip._id,
+            lat,
+            long,
+            timestamp: Date.now(),
+        });
+        await newCoordinate.save();
 
         res.status = 200;
-        res.send({ message: "New user registered.", jwt: newToken });
+        res.send({ message: "New trip added." });
     } catch (error) {
         console.log(error);
         if (error.message.includes("is required")) {
             res.status = 422;
             res.send("Some required fields are empty.");
-        } else if (error.message.includes("email_1 dup key")) {
-            res.status = 422;
-            res.send(`Email ${req.body.email} is already registered.`);
         } else {
             res.status = 500;
             res.send("Server error.");
@@ -41,36 +37,13 @@ tripsRoutes.post("/start", async (req, res) => {
 
 tripsRoutes.post("/add-coordinate", async (req, res) => {
     try {
-        const email = req.body.email;
-        const password = req.body.password;
+        const lat = req.body.lat;
+        const long = req.body.long;
+        const newCoordinate = new Coordinate({ lat, long });
+        await newCoordinate.save();
 
-        const user = await User.findOne({ email: email });
-        if (!user) {
-            return res.sendStatus(404);
-        }
-
-        bcrypt.compare(password, user.password, (err, isMatch) => {
-            if (err) {
-                console.log(err);
-                return res.sendStatus(422);
-            }
-            // console.log(isMatch);
-            if (!isMatch) {
-                res.status(401);
-                return res.send("Incorrect password.");
-            } else {
-                // return jwt
-                const newToken = jwt.sign(
-                    {
-                        userId: user._id,
-                    },
-                    jwta
-                );
-
-                res.status = 200;
-                res.send({ message: "User logged in.", jwt: newToken });
-            }
-        });
+        res.status = 200;
+        res.send({ message: "New user registered.", jwt: newToken });
     } catch (error) {
         console.log(error);
         if (error.message.includes("is required")) {
