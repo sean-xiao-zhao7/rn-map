@@ -6,8 +6,9 @@ import { Coordinate } from "./models/Coordinate.js";
 import { Trip } from "./models/Trip.js";
 
 const tripsRoutes = express.Router();
+tripsRoutes.use(requireAuthMiddleware);
 
-tripsRoutes.post("/add-trip", requireAuthMiddleware, async (req, res) => {
+tripsRoutes.post("/add-trip", async (req, res) => {
     try {
         const name = req.body.name;
         const newTrip = new Trip({ userId: req.user._id, name });
@@ -23,6 +24,9 @@ tripsRoutes.post("/add-trip", requireAuthMiddleware, async (req, res) => {
         });
         await newCoordinate.save();
 
+        newTrip.coordinates.push(newCoordinate);
+        newTrip.save();
+
         res.status = 200;
         res.send({ message: "New trip added." });
     } catch (error) {
@@ -37,7 +41,7 @@ tripsRoutes.post("/add-trip", requireAuthMiddleware, async (req, res) => {
     }
 });
 
-tripsRoutes.post("/add-coordinate", requireAuthMiddleware, async (req, res) => {
+tripsRoutes.post("/add-coordinate", async (req, res) => {
     try {
         const lat = req.body.lat;
         const long = req.body.long;
@@ -55,6 +59,28 @@ tripsRoutes.post("/add-coordinate", requireAuthMiddleware, async (req, res) => {
             res.status = 500;
             res.send("Server error.");
         }
+    }
+});
+
+tripsRoutes.get("/get-trips", async (req, res) => {
+    try {
+        const trips = await Trip.find({ userId: req.user._id });
+        res.status = 200;
+        res.send(trips);
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500);
+    }
+});
+
+tripsRoutes.get("/get-coordinates", async (req, res) => {
+    try {
+        const coordinates = await Coordinate.find({ userId: req.user._id });
+        res.status = 200;
+        res.send(coordinates);
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(500);
     }
 });
 
