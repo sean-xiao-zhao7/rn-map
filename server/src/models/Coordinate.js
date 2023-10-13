@@ -8,6 +8,11 @@ export const coordinateSchema = new Schema({
         ref: "Trip",
         required: true,
     },
+    tripId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+    },
     lat: { type: Number, required: true },
     long: { type: Number, required: true },
     timestamp: Number,

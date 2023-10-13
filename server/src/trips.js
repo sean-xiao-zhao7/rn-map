@@ -18,6 +18,7 @@ tripsRoutes.post("/add-trip", async (req, res) => {
         const long = req.body.long;
         const newCoordinate = new Coordinate({
             tripId: newTrip._id,
+            userId: req.user._id,
             lat,
             long,
             timestamp: Date.now(),
