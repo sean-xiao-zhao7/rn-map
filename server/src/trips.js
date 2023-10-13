@@ -85,4 +85,22 @@ tripsRoutes.get("/get-coordinates", async (req, res) => {
     }
 });
 
+tripsRoutes.delete("/delete-trip", async (req, res) => {
+    try {
+        await Trip.findByIdAndRemove(req.body.tripId);
+        res.sendStatus(200);
+    } catch (err) {
+        res.sendStatus(422);
+    }
+});
+
+tripsRoutes.delete("/delete-coordinates", async (req, res) => {
+    try {
+        await Coordinate.findOneAndRemove({ tripId: req.body.tripId });
+        res.sendStatus(200);
+    } catch (err) {
+        res.sendStatus(422);
+    }
+});
+
 export default tripsRoutes;
