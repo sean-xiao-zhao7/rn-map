@@ -8,7 +8,7 @@ export const coordinateSchema = new Schema({
         ref: "Trip",
         required: true,
     },
-    tripId: {
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
         required: true,

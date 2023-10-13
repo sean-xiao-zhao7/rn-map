@@ -25,9 +25,6 @@ tripsRoutes.post("/add-trip", async (req, res) => {
         });
         await newCoordinate.save();
 
-        newTrip.coordinates.push(newCoordinate);
-        newTrip.save();
-
         res.status = 200;
         res.send({ message: "New trip added." });
     } catch (error) {
@@ -46,11 +43,17 @@ tripsRoutes.post("/add-coordinate", async (req, res) => {
     try {
         const lat = req.body.lat;
         const long = req.body.long;
-        const newCoordinate = new Coordinate({ lat, long });
+        const tripId = req.body.tripId;
+        const newCoordinate = new Coordinate({
+            tripId,
+            lat,
+            long,
+            userId: req.user._id,
+        });
         await newCoordinate.save();
 
         res.status = 200;
-        res.send({ message: "New user registered.", jwt: newToken });
+        res.send({ message: "New coordinate added." });
     } catch (error) {
         console.log(error);
         if (error.message.includes("is required")) {
