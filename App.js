@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import {
+    SafeAreaProvider,
+    useSafeAreaInsets,
+} from "react-native-safe-area-context";
 
 // navigators
 
@@ -12,7 +16,7 @@ import AuthScreen from "./src/screens/AuthScreen";
 import RegisterScreen from "./src/screens/RegisterScreen";
 
 // options
-import defaultOptions from "../options/defaultOptions";
+import defaultOptions from "./src/navigation/options/defaultOptions";
 
 const rootStack = createStackNavigator();
 
@@ -27,30 +31,42 @@ export default function App() {
     }, []);
 
     if (loading) {
-        return <LoadingScreen />;
+        return (
+            <SafeAreaProvider>
+                <LoadingScreen />
+            </SafeAreaProvider>
+        );
     }
 
     return (
-        <NavigationContainer>
-            <rootStack.Navigator screenOptions={defaultOptions}>
-                {authStatus !== null ? (
-                    <>
-                        <rootStack.Screen name="Home" component={HomeScreen} />
-                        <rootStack.Screen
-                            name="Tracks"
-                            component={TracksScreen}
-                        />
-                    </>
-                ) : (
-                    <>
-                        <rootStack.Screen name="Auth" component={AuthScreen} />
-                        <rootStack.Screen
-                            name="Register"
-                            component={RegisterScreen}
-                        />
-                    </>
-                )}
-            </rootStack.Navigator>
-        </NavigationContainer>
+        <SafeAreaProvider>
+            <NavigationContainer>
+                <rootStack.Navigator screenOptions={defaultOptions}>
+                    {authStatus !== false ? (
+                        <>
+                            <rootStack.Screen
+                                name="Home"
+                                component={HomeScreen}
+                            />
+                            <rootStack.Screen
+                                name="Tracks"
+                                component={TracksScreen}
+                            />
+                        </>
+                    ) : (
+                        <>
+                            <rootStack.Screen
+                                name="Auth"
+                                component={AuthScreen}
+                            />
+                            <rootStack.Screen
+                                name="Register"
+                                component={RegisterScreen}
+                            />
+                        </>
+                    )}
+                </rootStack.Navigator>
+            </NavigationContainer>
+        </SafeAreaProvider>
     );
 }
