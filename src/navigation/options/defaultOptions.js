@@ -1,3 +1,3 @@
-export const defaultOptions = {
-    
+export default defaultOptions = {
+    headerShown: false,
 };
