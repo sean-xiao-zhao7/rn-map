@@ -1,16 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
 
-import HomeScreen from "./src/screens/HomeScreen";
-
-const rootStack = createStackNavigator();
+import RootNavigator from "./src/navigation/navigators/RootNavigator";
 
 export default function App() {
-    return (
-        <NavigationContainer>
-            <rootStack.Navigator>
-                <rootStack.Screen name="Home" component={HomeScreen} />
-            </rootStack.Navigator>
-        </NavigationContainer>
-    );
+    return <NavigationContainer>{RootNavigator}</NavigationContainer>;
 }
