@@ -1,5 +1,6 @@
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { View, Text } from "react-native";
+import { View } from "react-native";
+import { Text } from "@rneui/themed";
 
 const AuthScreen = () => {
     const insets = useSafeAreaInsets();
@@ -18,37 +19,7 @@ const AuthScreen = () => {
                 paddingRight: insets.right,
             }}
         >
-            <Text>
-                Similar to options, you can also pass a function to
-                screenOptions. The function will receive the navigation prop and
-                the route prop for each screen. This can be useful if you want
-                to configure options for all the screens in one place based on
-                the route:Similar to options, you can also pass a function to
-                screenOptions. The function will receive the navigation prop and
-                the route prop for each screen. This can be useful if you want
-                to configure options for all the screens in one place based on
-                the route:Similar to options, you can also pass a function to
-                screenOptions. The function will receive the navigation prop and
-                the route prop for each screen. This can be useful if you want
-                to configure options for all the screens in one place based on
-                the route:Similar to options, you can also pass a function to
-                screenOptions. The function will receive the navigation prop and
-                the route prop for each screen. This can be useful if you want
-                to configure options for all the screens in one place based on
-                the route:Similar to options, you can also pass a function to
-                screenOptions. The function will receive the navigation prop and
-                the route prop for each screen. This can be useful if you want
-                to configure options for all the screens in one place based on
-                the route:Similar to options, you can also pass a function to
-                screenOptions. The function will receive the navigation prop and
-                the route prop for each screen. This can be useful if you want
-                to configure options for all the screens in one place based on
-                the route:Similar to options, you can also pass a function to
-                screenOptions. The function will receive the navigation prop and
-                the route prop for each screen. This can be useful if you want
-                to configure options for all the screens in one place based on
-                the route:
-            </Text>
+            <Text h2>Login</Text>
         </View>
     );
 };
