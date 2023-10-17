@@ -1,5 +1,6 @@
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Text, LinearProgress } from "@rneui/themed";
 
 const LoadingScreen = () => {
     const insets = useSafeAreaInsets();
@@ -18,7 +19,9 @@ const LoadingScreen = () => {
                 paddingRight: insets.right,
             }}
         >
-            <Text>Loading...</Text>
+            <LinearProgress style={{ marginVertical: 10 }} />
+            <Text h3>Loading...</Text>
+            <LinearProgress style={{ marginVertical: 10 }} />
         </View>
     );
 };
