@@ -2,6 +2,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { View } from "react-native";
 import { Text, Input, Icon, Button } from "@rneui/themed";
 import { useState } from "react";
+import { StyleSheet } from "react-native";
 
 const AuthScreen = () => {
     const insets = useSafeAreaInsets();
@@ -18,7 +19,6 @@ const AuthScreen = () => {
         <View
             style={{
                 flex: 1,
-                justifyContent: "space-between",
                 alignItems: "center",
 
                 // Paddings to handle safe area
@@ -28,29 +28,46 @@ const AuthScreen = () => {
                 paddingRight: insets.right,
             }}
         >
-            <Text h3>Login</Text>
-            <Input
-                placeholder="Email"
-                leftIcon={
-                    <Icon name="user" size={24} color="black" type="evilicon" />
-                }
-            />
-            <Input
-                placeholder="Password"
-                leftIcon={
-                    <Icon
-                        name="unlock"
-                        size={24}
-                        color="black"
-                        type="evilicon"
-                    />
-                }
-            />
-            <Button size="lg" onPress={onClickHandler} loading={loading}>
-                Login
-            </Button>
+            <Text h3 style={{ marginTop: 150, position: "absolute" }}>
+                Login to Maps
+            </Text>
+            <View style={styles.centerSection}>
+                <Input
+                    placeholder="Email"
+                    leftIcon={
+                        <Icon
+                            name="user"
+                            size={24}
+                            color="black"
+                            type="evilicon"
+                        />
+                    }
+                />
+                <Input
+                    placeholder="Password"
+                    leftIcon={
+                        <Icon
+                            name="unlock"
+                            size={24}
+                            color="black"
+                            type="evilicon"
+                        />
+                    }
+                />
+                <Button size="lg" onPress={onClickHandler} loading={loading}>
+                    Login
+                </Button>
+            </View>
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    centerSection: {
+        width: "100%",
+        flex: 1,
+        justifyContent: "center",
+    },
+});
 
 export default AuthScreen;
