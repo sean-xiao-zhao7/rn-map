@@ -15,6 +15,9 @@ import RegisterScreen from "./src/screens/RegisterScreen";
 // options
 import defaultOptions from "./src/navigation/options/defaultOptions";
 
+// context
+import { Provider as AuthProvider } from "./src/context/AuthContext";
+
 const rootStack = createStackNavigator();
 
 export default function App() {
@@ -38,31 +41,33 @@ export default function App() {
     return (
         <SafeAreaProvider>
             <NavigationContainer>
-                <rootStack.Navigator screenOptions={defaultOptions}>
-                    {authStatus !== false ? (
-                        <>
-                            <rootStack.Screen
-                                name="Home"
-                                component={HomeScreen}
-                            />
-                            <rootStack.Screen
-                                name="Tracks"
-                                component={TracksScreen}
-                            />
-                        </>
-                    ) : (
-                        <>
-                            <rootStack.Screen
-                                name="Auth"
-                                component={AuthScreen}
-                            />
-                            <rootStack.Screen
-                                name="Register"
-                                component={RegisterScreen}
-                            />
-                        </>
-                    )}
-                </rootStack.Navigator>
+                <AuthProvider>
+                    <rootStack.Navigator screenOptions={defaultOptions}>
+                        {authStatus !== false ? (
+                            <>
+                                <rootStack.Screen
+                                    name="Home"
+                                    component={HomeScreen}
+                                />
+                                <rootStack.Screen
+                                    name="Tracks"
+                                    component={TracksScreen}
+                                />
+                            </>
+                        ) : (
+                            <>
+                                <rootStack.Screen
+                                    name="Auth"
+                                    component={AuthScreen}
+                                />
+                                <rootStack.Screen
+                                    name="Register"
+                                    component={RegisterScreen}
+                                />
+                            </>
+                        )}
+                    </rootStack.Navigator>
+                </AuthProvider>
             </NavigationContainer>
         </SafeAreaProvider>
     );

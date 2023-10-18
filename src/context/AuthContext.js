@@ -13,7 +13,7 @@ const authReducer = (state, action) => {
     }
 };
 
-const authContext = createDataContext(
+export const { Context, Provider } = createDataContext(
     authReducer,
     {},
     {
