@@ -7,6 +7,8 @@ import { StyleSheet } from "react-native";
 const AuthScreen = () => {
     const insets = useSafeAreaInsets();
     const [loading, setLoading] = useState(false);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     const onClickHandler = () => {
         setLoading(true);
@@ -42,6 +44,9 @@ const AuthScreen = () => {
                             type="evilicon"
                         />
                     }
+                    value={email}
+                    onTextInput={setEmail}
+                    autoCapitalize="none"
                 />
                 <Input
                     placeholder="Password"
@@ -53,6 +58,10 @@ const AuthScreen = () => {
                             type="evilicon"
                         />
                     }
+                    value={password}
+                    onTextInput={setPassword}
+                    autoCapitalize="none"
+                    secureTextEntry={true}
                 />
                 <Button size="lg" onPress={onClickHandler} loading={loading}>
                     Login
