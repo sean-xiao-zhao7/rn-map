@@ -45,7 +45,7 @@ const AuthScreen = () => {
                         />
                     }
                     value={email}
-                    onTextInput={setEmail}
+                    onChangeText={setEmail}
                     autoCapitalize="none"
                 />
                 <Input
@@ -59,7 +59,7 @@ const AuthScreen = () => {
                         />
                     }
                     value={password}
-                    onTextInput={setPassword}
+                    onChangeText={setPassword}
                     autoCapitalize="none"
                     secureTextEntry={true}
                 />
