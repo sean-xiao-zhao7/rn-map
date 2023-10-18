@@ -1,6 +1,6 @@
 import createDataContext from "./createDataContext";
 
-const AuthReducer = (state, action) => {
+const authReducer = (state, action) => {
     switch (action.type) {
         case "REGISTER":
             return state;
@@ -12,3 +12,12 @@ const AuthReducer = (state, action) => {
             return state;
     }
 };
+
+const authContext = createDataContext(
+    authReducer,
+    {},
+    {
+        authStatus: false,
+        user: {},
+    }
+);
