@@ -35,20 +35,26 @@ const authReducer = (state, action) => {
 
 // actions
 const registerAction = (dispatch) => {
-    return (payload) => {
+    return async (payload) => {
         const result = apiRequest("/register", "post", payload);
-        dispatch("REGISTER", { jwt: result.jwt, email: payload.email });
+        dispatch({
+            type: "REGISTER",
+            payload: { jwt: result.jwt, email: payload.email },
+        });
     };
 };
 const loginAction = (dispatch) => {
-    return (payload) => {
-        const result = apiRequest("/login", "post", payload);
-        dispatch("LOGIN", { jwt: result.jwt, email: payload.email });
+    return async (payload) => {
+        const result = await apiRequest("/login", "post", payload);
+        dispatch({
+            type: "LOGIN",
+            payload: { jwt: result.jwt, email: payload.email },
+        });
     };
 };
 const logoutAction = (dispatch) => {
     return () => {
-        dispatch("LOGOUT", payload);
+        dispatch({ type: "LOGOUT" });
     };
 };
 

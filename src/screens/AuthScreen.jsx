@@ -1,21 +1,28 @@
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { View } from "react-native";
 import { Text, Input, Icon, Button } from "@rneui/themed";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 
 import { Context as AuthContext } from "../context/AuthContext";
 
-const AuthScreen = () => {
+const AuthScreen = ({ navigation }) => {
     const insets = useSafeAreaInsets();
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const { loginAction } = useContext(AuthContext);
+    const { loginAction, state } = useContext(AuthContext);
+
+    useEffect(() => {
+        if (state.authStatus) {
+            navigation.navigate("Home");
+        }
+    }, [state.authStatus]);
 
     const onClickHandler = async () => {
         setLoading(true);
         await loginAction({ email, password });
+        setLoading(false);
     };
 
     return (
