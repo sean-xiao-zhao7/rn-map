@@ -50,13 +50,18 @@ const registerAction = (dispatch) => {
 };
 const loginAction = (dispatch) => {
     return async (payload) => {
-        const result = await apiRequest("/login", "post", payload);
+        let result = await apiRequest("/login", "post", payload);
         if (typeof result === Object) {
             dispatch({
                 type: "LOGIN",
                 payload: { jwt: result.jwt, email: payload.email },
             });
         } else {
+            if (result.includes("401")) {
+                result = "Wrong email/password.";
+            } else if (result.includes("404")) {
+                result = "Email is not registered.";
+            }
             dispatch({
                 type: "ERROR",
                 payload: { error: result },

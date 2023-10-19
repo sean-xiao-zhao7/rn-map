@@ -18,7 +18,7 @@ const AuthScreen = ({ navigation }) => {
 
     // context
     const { loginAction, state } = useContext(AuthContext);
-
+    console.log(state.error, dialogVisible);
     useEffect(() => {
         if (state.authStatus) {
             navigation.navigate("Home");
