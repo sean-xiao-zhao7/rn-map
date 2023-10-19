@@ -33,7 +33,7 @@ const logoutAction = (dispatch) => {
 
 export const { Context, Provider } = createDataContext(
     authReducer,
-    { registerAction, loginAction, logoutAction },
+    [registerAction, loginAction, logoutAction],
     {
         authStatus: false,
         user: {},
