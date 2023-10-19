@@ -17,7 +17,7 @@ const AuthScreen = ({ navigation }) => {
     const [dialogVisible, setDialogVisible] = useState(false);
 
     // context
-    const { loginAction, state } = useContext(AuthContext);
+    const { loginAction, clearErrorAction, state } = useContext(AuthContext);
 
     useEffect(() => {
         if (state.authStatus) {
@@ -32,6 +32,11 @@ const AuthScreen = ({ navigation }) => {
         setLoading(true);
         await loginAction({ email, password });
         setLoading(false);
+    };
+
+    const closeErrorDialogHandler = async () => {
+        await clearErrorAction();
+        setDialogVisible(false);
     };
 
     return (
@@ -49,7 +54,7 @@ const AuthScreen = ({ navigation }) => {
         >
             <Dialog
                 isVisible={dialogVisible}
-                onBackdropPress={() => setDialogVisible(false)}
+                onBackdropPress={closeErrorDialogHandler}
             >
                 <Dialog.Title title="Unable to login" />
                 <Text>{error}</Text>

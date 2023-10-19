@@ -33,6 +33,11 @@ const authReducer = (state, action) => {
                 ...state,
                 error: action.payload.error,
             };
+        case "CLEAR_ERROR":
+            return {
+                ...state,
+                error: null,
+            };
         default:
             return state;
     }
@@ -51,8 +56,7 @@ const registerAction = (dispatch) => {
 const loginAction = (dispatch) => {
     return async (payload) => {
         let result = await apiRequest("/login", "post", payload);
-        console.log(typeof result);
-        if (typeof result === Object) {
+        if (typeof result === "object") {
             dispatch({
                 type: "LOGIN",
                 payload: { jwt: result.jwt, email: payload.email },
@@ -76,9 +80,15 @@ const logoutAction = (dispatch) => {
     };
 };
 
+const clearErrorAction = (dispatch) => {
+    return () => {
+        dispatch({ type: "CLEAR_ERROR" });
+    };
+};
+
 export const { Context, Provider } = createDataContext(
     authReducer,
-    { registerAction, loginAction, logoutAction },
+    { registerAction, loginAction, logoutAction, clearErrorAction },
     {
         authStatus: false,
         user: {},
