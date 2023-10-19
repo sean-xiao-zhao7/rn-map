@@ -1,17 +1,32 @@
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { View } from "react-native";
-import { Text, Input, Icon, Button } from "@rneui/themed";
-import { useContext, useState } from "react";
+import { Text, Input, Icon, Button, Dialog } from "@rneui/themed";
+import { useContext, useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 
 import { Context as AuthContext } from "../context/AuthContext";
 
-const AuthScreen = () => {
+const AuthScreen = ({ navigation }) => {
     const insets = useSafeAreaInsets();
+
+    // states
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const { loginAction } = useContext(AuthContext);
+    const [error, setError] = useState("");
+    const [dialogVisible, setDialogVisible] = useState(false);
+
+    // context
+    const { loginAction, state } = useContext(AuthContext);
+
+    useEffect(() => {
+        if (state.authStatus) {
+            navigation.navigate("Home");
+        } else if (state.error) {
+            setError(state.error);
+            setDialogVisible(true);
+        }
+    }, [state.authStatus]);
 
     const onClickHandler = async () => {
         setLoading(true);
@@ -32,6 +47,13 @@ const AuthScreen = () => {
                 paddingRight: insets.right,
             }}
         >
+            <Dialog
+                isVisible={dialogVisible}
+                onBackdropPress={() => setDialogVisible(false)}
+            >
+                <Dialog.Title title="Unable to login" />
+                <Text>{error}</Text>
+            </Dialog>
             <Text h3 style={{ marginTop: 150, position: "absolute" }}>
                 Login to Maps
             </Text>

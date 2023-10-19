@@ -28,6 +28,11 @@ const authReducer = (state, action) => {
                 authStatus: false,
                 user: {},
             };
+        case "ERROR":
+            return {
+                ...state,
+                error: action.payload.error,
+            };
         default:
             return state;
     }
@@ -46,10 +51,17 @@ const registerAction = (dispatch) => {
 const loginAction = (dispatch) => {
     return async (payload) => {
         const result = await apiRequest("/login", "post", payload);
-        dispatch({
-            type: "LOGIN",
-            payload: { jwt: result.jwt, email: payload.email },
-        });
+        if (typeof result === Object) {
+            dispatch({
+                type: "LOGIN",
+                payload: { jwt: result.jwt, email: payload.email },
+            });
+        } else {
+            dispatch({
+                type: "ERROR",
+                payload: { error: result },
+            });
+        }
     };
 };
 const logoutAction = (dispatch) => {

@@ -21,7 +21,6 @@ export const apiRequest = async (uri, type, payload) => {
         }
         return result.data;
     } catch (err) {
-        console.log(err);
-        return false;
+        return err.message;
     }
 };
