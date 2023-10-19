@@ -1,5 +1,5 @@
 import { base } from "../../a.js";
-import { axios } from "axios";
+import axios from "axios";
 
 export const apiRequest = async (uri, type, payload) => {
     try {

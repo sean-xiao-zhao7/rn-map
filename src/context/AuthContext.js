@@ -34,13 +34,13 @@ const authReducer = (state, action) => {
 // actions
 const registerAction = (dispatch) => {
     return (payload) => {
-        apiRequest("/register", "post", payload);
+        const result = apiRequest("/register", "post", payload);
         dispatch("REGISTER", payload);
     };
 };
 const loginAction = (dispatch) => {
     return (payload) => {
-        apiRequest("/login", "post", payload);
+        const result = apiRequest("/login", "post", payload);
         dispatch("LOGIN", payload);
     };
 };

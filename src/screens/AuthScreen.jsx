@@ -1,7 +1,7 @@
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { View } from "react-native";
 import { Text, Input, Icon, Button } from "@rneui/themed";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { StyleSheet } from "react-native";
 
 import { Context as AuthContext } from "../context/AuthContext";
@@ -11,10 +11,11 @@ const AuthScreen = () => {
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const { loginAction } = useContext(AuthContext);
 
-    const onClickHandler = () => {
+    const onClickHandler = async () => {
         setLoading(true);
-
+        await loginAction({ email, password });
         setLoading(false);
     };
 
