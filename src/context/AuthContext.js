@@ -15,13 +15,25 @@ const authReducer = (state, action) => {
 };
 
 // actions
-const registerAction = (dispatch) => {};
-const loginAction = (dispatch) => {};
-const logoutAction = (dispatch) => {};
+const registerAction = (dispatch) => {
+    return (payload) => {
+        dispatch("REGISTER", payload);
+    };
+};
+const loginAction = (dispatch) => {
+    return (payload) => {
+        dispatch("LOGIN", payload);
+    };
+};
+const logoutAction = (dispatch) => {
+    return () => {
+        dispatch("LOGOUT", payload);
+    };
+};
 
 export const { Context, Provider } = createDataContext(
     authReducer,
-    {},
+    { registerAction, loginAction, logoutAction },
     {
         authStatus: false,
         user: {},
