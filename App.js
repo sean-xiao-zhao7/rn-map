@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -16,13 +16,23 @@ import RegisterScreen from "./src/screens/RegisterScreen";
 import defaultOptions from "./src/navigation/options/defaultOptions";
 
 // context
-import { Provider as AuthProvider } from "./src/context/AuthContext";
+import {
+    Provider as AuthProvider,
+    Context as AuthContext,
+} from "./src/context/AuthContext";
 
 const rootStack = createStackNavigator();
 
 export default function App() {
     const [loading, setLoading] = useState(true);
+    const result = useContext(AuthContext);
     const [authStatus, setAuthStatus] = useState(false);
+
+    useEffect(() => {
+        if (result && result.authStatus) {
+            setAuthStatus(true);
+        }
+    }, [result]);
 
     useEffect(() => {
         setTimeout(() => {
