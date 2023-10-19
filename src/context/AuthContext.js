@@ -1,3 +1,5 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 import createDataContext from "./createDataContext";
 import { apiRequest } from "./apiRequest";
 
@@ -68,6 +70,7 @@ const loginAction = (dispatch) => {
                     type: "LOGIN",
                     payload: { jwt: result.jwt, email: payload.email },
                 });
+                await AsyncStorage.setItem("app-maps-jwt", result.jwt);
             } else {
                 if (result.includes("401")) {
                     result = "Wrong email/password.";
