@@ -5,11 +5,27 @@ import { apiRequest } from "./apiRequest";
 const authReducer = (state, action) => {
     switch (action.type) {
         case "REGISTER":
-            return state;
+            return {
+                ...state,
+                authStatus: "success",
+                user: {
+                    email: action.payload.email,
+                },
+            };
         case "LOGIN":
-            return state;
+            return {
+                ...state,
+                authStatus: "success",
+                user: {
+                    email: action.payload.email,
+                },
+            };
         case "LOGOUT":
-            return state;
+            return {
+                ...state,
+                authStatus: false,
+                user: {},
+            };
         default:
             return state;
     }

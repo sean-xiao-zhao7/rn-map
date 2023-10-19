@@ -4,6 +4,8 @@ import { Text, Input, Icon, Button } from "@rneui/themed";
 import { useState } from "react";
 import { StyleSheet } from "react-native";
 
+import { Context as AuthContext } from "../context/AuthContext";
+
 const AuthScreen = () => {
     const insets = useSafeAreaInsets();
     const [loading, setLoading] = useState(false);
@@ -12,9 +14,8 @@ const AuthScreen = () => {
 
     const onClickHandler = () => {
         setLoading(true);
-        setTimeout(() => {
-            setLoading(false);
-        }, 3000);
+
+        setLoading(false);
     };
 
     return (
