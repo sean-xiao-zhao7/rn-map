@@ -1,4 +1,5 @@
 import createDataContext from "./createDataContext";
+import { apiRequest } from "./apiRequest";
 
 // reducer
 const authReducer = (state, action) => {
@@ -17,11 +18,13 @@ const authReducer = (state, action) => {
 // actions
 const registerAction = (dispatch) => {
     return (payload) => {
+        apiRequest("/register", "post", payload);
         dispatch("REGISTER", payload);
     };
 };
 const loginAction = (dispatch) => {
     return (payload) => {
+        apiRequest("/login", "post", payload);
         dispatch("LOGIN", payload);
     };
 };
