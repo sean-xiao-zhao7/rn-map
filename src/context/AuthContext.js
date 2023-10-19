@@ -55,22 +55,30 @@ const registerAction = (dispatch) => {
 };
 const loginAction = (dispatch) => {
     return async (payload) => {
-        let result = await apiRequest("/login", "post", payload);
-        if (typeof result === "object") {
-            dispatch({
-                type: "LOGIN",
-                payload: { jwt: result.jwt, email: payload.email },
-            });
-        } else {
-            if (result.includes("401")) {
-                result = "Wrong email/password.";
-            } else if (result.includes("404")) {
-                result = "Email is not registered.";
-            }
+        if (payload.email === "" || payload.password === "") {
             dispatch({
                 type: "ERROR",
-                payload: { error: result },
+                payload: { error: "Email/password is empty." },
             });
+        } else {
+            let result = await apiRequest("/login", "post", payload);
+
+            if (typeof result === "object") {
+                dispatch({
+                    type: "LOGIN",
+                    payload: { jwt: result.jwt, email: payload.email },
+                });
+            } else {
+                if (result.includes("401")) {
+                    result = "Wrong email/password.";
+                } else if (result.includes("404")) {
+                    result = "Email is not registered.";
+                }
+                dispatch({
+                    type: "ERROR",
+                    payload: { error: result },
+                });
+            }
         }
     };
 };
