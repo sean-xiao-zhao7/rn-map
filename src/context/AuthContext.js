@@ -51,6 +51,7 @@ const registerAction = (dispatch) => {
 const loginAction = (dispatch) => {
     return async (payload) => {
         let result = await apiRequest("/login", "post", payload);
+        console.log(typeof result);
         if (typeof result === Object) {
             dispatch({
                 type: "LOGIN",
