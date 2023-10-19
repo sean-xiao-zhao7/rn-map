@@ -19,8 +19,7 @@ export const apiRequest = async (uri, type, payload) => {
             default:
                 break;
         }
-        const resultJSON = result.json();
-        return resultJSON;
+        return result.data;
     } catch (err) {
         console.log(err);
         return false;

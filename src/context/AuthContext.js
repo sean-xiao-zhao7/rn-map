@@ -7,17 +7,19 @@ const authReducer = (state, action) => {
         case "REGISTER":
             return {
                 ...state,
-                authStatus: "success",
+                authStatus: "registered",
                 user: {
                     email: action.payload.email,
+                    jwt: action.payload.jwt,
                 },
             };
         case "LOGIN":
             return {
                 ...state,
-                authStatus: "success",
+                authStatus: "loggedin",
                 user: {
                     email: action.payload.email,
+                    jwt: action.payload.jwt,
                 },
             };
         case "LOGOUT":
@@ -35,13 +37,13 @@ const authReducer = (state, action) => {
 const registerAction = (dispatch) => {
     return (payload) => {
         const result = apiRequest("/register", "post", payload);
-        dispatch("REGISTER", payload);
+        dispatch("REGISTER", { jwt: result.jwt, email: payload.email });
     };
 };
 const loginAction = (dispatch) => {
     return (payload) => {
         const result = apiRequest("/login", "post", payload);
-        dispatch("LOGIN", payload);
+        dispatch("LOGIN", { jwt: result.jwt, email: payload.email });
     };
 };
 const logoutAction = (dispatch) => {
@@ -56,5 +58,6 @@ export const { Context, Provider } = createDataContext(
     {
         authStatus: false,
         user: {},
+        error: null,
     }
 );

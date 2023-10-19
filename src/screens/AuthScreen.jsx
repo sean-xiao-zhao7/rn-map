@@ -16,7 +16,6 @@ const AuthScreen = () => {
     const onClickHandler = async () => {
         setLoading(true);
         await loginAction({ email, password });
-        setLoading(false);
     };
 
     return (
