@@ -1,5 +1,6 @@
 import createDataContext from "./createDataContext";
 
+// reducer
 const authReducer = (state, action) => {
     switch (action.type) {
         case "REGISTER":
@@ -12,6 +13,11 @@ const authReducer = (state, action) => {
             return state;
     }
 };
+
+// actions
+const registerAction = (dispatch) => {};
+const loginAction = (dispatch) => {};
+const logoutAction = (dispatch) => {};
 
 export const { Context, Provider } = createDataContext(
     authReducer,
