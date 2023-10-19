@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Text, LinearProgress } from "@rneui/themed";
+import { Button, LinearProgress, Text } from "@rneui/themed";
 
 const LoadingScreen = () => {
     const insets = useSafeAreaInsets();
@@ -20,7 +20,21 @@ const LoadingScreen = () => {
             }}
         >
             <LinearProgress style={{ marginVertical: 10 }} />
-            <Text h3>Loading...</Text>
+            <Button
+                containerStyle={
+                    {
+                        // width: 200,
+                    }
+                }
+                title="Clear Button"
+                type="clear"
+                loadingStyle={{ color: "rgba(78, 116, 289, 1)" }}
+                loadingProps={{
+                    size: "large",
+                    color: "rgba(111, 202, 186, 1)",
+                }}
+                loading
+            />
             <LinearProgress style={{ marginVertical: 10 }} />
         </View>
     );
