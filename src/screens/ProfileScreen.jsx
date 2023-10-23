@@ -20,7 +20,7 @@ const ProfileScreen = () => {
                 backgroundColor: "white",
             }}
         >
-            <Text h4>Profile flow</Text>
+            <Text h4>Profile</Text>
         </View>
     );
 };
