@@ -35,10 +35,20 @@ const authReducer = (state, action) => {
                 ...state,
                 error: action.payload.error,
             };
+        case "REGISTER_ERROR":
+            return {
+                ...state,
+                register_error: action.payload.register_error,
+            };
         case "CLEAR_ERROR":
             return {
                 ...state,
                 error: null,
+            };
+        case "CLEAR_REGISTER_ERROR":
+            return {
+                ...state,
+                register_error: null,
             };
         default:
             return state;
@@ -48,11 +58,23 @@ const authReducer = (state, action) => {
 // actions
 const registerAction = (dispatch) => {
     return async (payload) => {
-        const result = apiRequest("/register", "post", payload);
-        dispatch({
-            type: "REGISTER",
-            payload: { jwt: result.jwt, email: payload.email },
-        });
+        if (payload.email === "" || payload.password === "") {
+            dispatch({
+                type: "REGISTER_ERROR",
+                payload: { register_error: "Email/password is empty." },
+            });
+        } else if (payload.password !== payload.passwordAgain) {
+            dispatch({
+                type: "REGISTER_ERROR",
+                payload: { register_error: "Two passwords are not equal." },
+            });
+        } else {
+            const result = apiRequest("/register", "post", payload);
+            dispatch({
+                type: "REGISTER",
+                payload: { jwt: result.jwt, email: payload.email },
+            });
+        }
     };
 };
 const loginAction = (dispatch) => {
@@ -100,12 +122,25 @@ const clearErrorAction = (dispatch) => {
     };
 };
 
+const clearRegisterErrorAction = (dispatch) => {
+    return () => {
+        dispatch({ type: "CLEAR_REGISTER_ERROR" });
+    };
+};
+
 export const { Context, Provider } = createDataContext(
     authReducer,
-    { registerAction, loginAction, logoutAction, clearErrorAction },
+    {
+        registerAction,
+        loginAction,
+        logoutAction,
+        clearErrorAction,
+        clearRegisterErrorAction,
+    },
     {
         authStatus: false,
         user: {},
         error: null,
+        register_error: null,
     }
 );

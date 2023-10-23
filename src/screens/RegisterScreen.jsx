@@ -1,5 +1,5 @@
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { View, TouchableOpacity } from "react-native";
+import { View } from "react-native";
 import { Text, Input, Icon, Button, Dialog } from "@rneui/themed";
 import { useContext, useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
@@ -13,29 +13,31 @@ const RegisterScreen = ({ navigation }) => {
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [passwordAgain, setPasswordAgain] = useState("");
     const [error, setError] = useState("");
     const [dialogVisible, setDialogVisible] = useState(false);
 
     // context
-    const { loginAction, clearErrorAction, state } = useContext(AuthContext);
+    const { registerAction, clearRegisterErrorAction, state } =
+        useContext(AuthContext);
 
     useEffect(() => {
         if (state.authStatus) {
             navigation.navigate("Home");
-        } else if (state.error) {
-            setError(state.error);
+        } else if (state.register_error) {
+            setError(state.register_error);
             setDialogVisible(true);
         }
-    }, [state.authStatus, state.error]);
+    }, [state.authStatus, state.register_error]);
 
     const onClickHandler = async () => {
         setLoading(true);
-        await loginAction({ email, password });
+        await registerAction({ email, password, passwordAgain });
         setLoading(false);
     };
 
     const closeErrorDialogHandler = async () => {
-        await clearErrorAction();
+        await clearRegisterErrorAction();
         setDialogVisible(false);
     };
 
@@ -56,7 +58,7 @@ const RegisterScreen = ({ navigation }) => {
                 isVisible={dialogVisible}
                 onBackdropPress={closeErrorDialogHandler}
             >
-                <Dialog.Title title="Unable to login" />
+                <Dialog.Title title="Unable to register" />
                 <Text>{error}</Text>
             </Dialog>
             <View style={{ marginTop: 150, position: "absolute" }}>
@@ -96,6 +98,21 @@ const RegisterScreen = ({ navigation }) => {
                     }
                     value={password}
                     onChangeText={setPassword}
+                    autoCapitalize="none"
+                    secureTextEntry={true}
+                />
+                <Input
+                    placeholder="Password again"
+                    leftIcon={
+                        <Icon
+                            name="unlock"
+                            size={24}
+                            color="black"
+                            type="evilicon"
+                        />
+                    }
+                    value={passwordAgain}
+                    onChangeText={setPasswordAgain}
                     autoCapitalize="none"
                     secureTextEntry={true}
                 />
