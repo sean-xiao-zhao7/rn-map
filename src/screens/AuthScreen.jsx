@@ -1,9 +1,8 @@
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { View, TouchableOpacity } from "react-native";
+import { View } from "react-native";
 import { Text, Input, Icon, Button, Dialog } from "@rneui/themed";
 import { useContext, useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
-
 import { Context as AuthContext } from "../context/AuthContext";
 
 const AuthScreen = ({ navigation }) => {

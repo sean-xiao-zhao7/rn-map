@@ -14,20 +14,29 @@ import AuthScreen from "./src/screens/AuthScreen";
 import RegisterScreen from "./src/screens/RegisterScreen";
 
 // options
-import defaultOptions from "./src/navigation/options/defaultOptions";
+import defaultOptions, {
+    defaultBottomTabOptions,
+} from "./src/navigation/options/defaultOptions";
 
 // context
 import { Provider as AuthProvider } from "./src/context/AuthContext";
 
 const rootStack = createStackNavigator();
+const TracksStack = createStackNavigator();
 const MainBottomTab = createBottomTabNavigator();
 
 const AuthedFlow = () => (
-    <MainBottomTab.Navigator screenOptions={defaultOptions}>
+    <MainBottomTab.Navigator screenOptions={defaultBottomTabOptions}>
         <rootStack.Screen name="Home" component={HomeScreen} />
-        <rootStack.Screen name="Tracks" component={TracksScreen} />
+        <rootStack.Screen name="TracksFlow" component={TracksFlow} />
     </MainBottomTab.Navigator>
 );
+
+const TracksFlow = () => {
+    <TracksStack.Navigator screenOptions={defaultOptions}>
+        <TracksStack.Screen name="TracksList" component={TracksScreen} />
+    </TracksStack.Navigator>;
+};
 
 export default function App() {
     const [loading, setLoading] = useState(true);
