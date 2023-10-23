@@ -19,7 +19,7 @@ const HomeScreen = () => {
                 backgroundColor: "white",
             }}
         >
-            <Text>Home Screen</Text>
+            <Text>Tracks App</Text>
         </View>
     );
 };

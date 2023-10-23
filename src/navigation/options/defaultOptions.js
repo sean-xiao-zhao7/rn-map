@@ -8,8 +8,20 @@ export default defaultOptions = {
 
 export const defaultBottomTabOptions = {
     headerShown: false,
-    tabBarShowLabel: false,
+    // tabBarShowLabel: false,
     tabBarStyle: {
-        padding: 0,
+        paddingTop: 10,
+        height: 120,
+    },
+    tabBarActiveTintColor: "teal",
+    tabBarInactiveTintColor: "#ccc",
+    tabBarLabelPosition: "beside-icon",
+    tabBarLabelStyle: {
+        fontSize: 18,
+    },
+    tabBarIconStyle: {
+        width: 50,
+        height: 60,
+        // backgroundColor: "green",
     },
 };

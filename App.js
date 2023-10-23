@@ -36,7 +36,7 @@ const AuthedFlow = () => (
                 tabBarIcon: ({ color, size }) => (
                     <Icon
                         name="public"
-                        size={30}
+                        size={40}
                         color={color}
                         type="material"
                         style={{ marginBottom: 20 }}
@@ -52,13 +52,12 @@ const AuthedFlow = () => (
                 tabBarIcon: ({ color, size }) => (
                     <Icon
                         name="account-circle"
-                        size={30}
+                        size={40}
                         color={color}
                         type="material"
                         style={{ marginBottom: 20 }}
                     />
                 ),
-                ...defaultOptions,
             }}
         />
     </MainBottomTab.Navigator>
