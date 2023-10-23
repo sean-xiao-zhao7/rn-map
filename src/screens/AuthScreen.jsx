@@ -59,9 +59,16 @@ const AuthScreen = ({ navigation }) => {
                 <Dialog.Title title="Unable to login" />
                 <Text>{error}</Text>
             </Dialog>
-            <Text h3 style={{ marginTop: 150, position: "absolute" }}>
-                Login to Maps
-            </Text>
+            <View style={{ marginTop: 150, position: "absolute" }}>
+                <Icon
+                    name="public"
+                    size={50}
+                    color="teal"
+                    type="material"
+                    style={{ marginBottom: 20 }}
+                />
+                <Text h3>Login to Maps</Text>
+            </View>
             <View style={styles.centerSection}>
                 <Input
                     placeholder="Email"

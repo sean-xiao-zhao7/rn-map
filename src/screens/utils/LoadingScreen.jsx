@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { Button, LinearProgress, Text } from "@rneui/themed";
+import { Button, LinearProgress, Icon } from "@rneui/themed";
 
 const LoadingScreen = () => {
     const insets = useSafeAreaInsets();
@@ -20,6 +20,13 @@ const LoadingScreen = () => {
             }}
         >
             <LinearProgress style={{ marginVertical: 10 }} />
+            <Icon
+                name="public"
+                size={50}
+                color="teal"
+                type="material"
+                style={{ marginBottom: 20 }}
+            />
             <Button
                 containerStyle={
                     {
