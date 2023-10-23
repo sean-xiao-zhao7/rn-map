@@ -58,10 +58,15 @@ const authReducer = (state, action) => {
 // actions
 const registerAction = (dispatch) => {
     return async (payload) => {
-        if (payload.email === "" || payload.password === "") {
+        if (
+            payload.email === "" ||
+            payload.password === "" ||
+            payload.firstname === "" ||
+            payload.lastname === ""
+        ) {
             dispatch({
                 type: "REGISTER_ERROR",
-                payload: { register_error: "Email/password is empty." },
+                payload: { register_error: "Some field(s) is empty." },
             });
         } else if (payload.password !== payload.passwordAgain) {
             dispatch({
@@ -69,11 +74,26 @@ const registerAction = (dispatch) => {
                 payload: { register_error: "Two passwords are not equal." },
             });
         } else {
-            const result = apiRequest("/register", "post", payload);
-            dispatch({
-                type: "REGISTER",
-                payload: { jwt: result.jwt, email: payload.email },
-            });
+            let result = await apiRequest("/register", "post", payload);
+
+            if (typeof result === "object") {
+                dispatch({
+                    type: "REGISTER",
+                    payload: { jwt: result.jwt, email: payload.email },
+                });
+                await AsyncStorage.setItem("app-maps-jwt", result.jwt);
+                await AsyncStorage.setItem("app-maps-email", payload.email);
+            } else {
+                if (result.includes("401")) {
+                    result = "Wrong email/password.";
+                } else {
+                    result = "Server error.";
+                }
+                dispatch({
+                    type: "ERROR",
+                    payload: { error: result },
+                });
+            }
         }
     };
 };

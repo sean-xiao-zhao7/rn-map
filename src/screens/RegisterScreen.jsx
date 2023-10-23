@@ -11,6 +11,8 @@ const RegisterScreen = ({ navigation }) => {
 
     // states
     const [loading, setLoading] = useState(false);
+    const [firstname, setFirstname] = useState("");
+    const [lastname, setLastname] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordAgain, setPasswordAgain] = useState("");
@@ -61,7 +63,7 @@ const RegisterScreen = ({ navigation }) => {
                 <Dialog.Title title="Unable to register" />
                 <Text>{error}</Text>
             </Dialog>
-            <View style={{ marginTop: 150, position: "absolute" }}>
+            <View style={{ marginTop: 70, position: "absolute" }}>
                 <Icon
                     name="public"
                     size={50}
@@ -73,13 +75,41 @@ const RegisterScreen = ({ navigation }) => {
             </View>
             <View style={styles.centerSection}>
                 <Input
+                    placeholder="First name"
+                    leftIcon={
+                        <Icon
+                            name="account-circle"
+                            size={24}
+                            color="#5f6368"
+                            type="material"
+                        />
+                    }
+                    value={firstname}
+                    onChangeText={setFirstname}
+                    autoCapitalize="none"
+                />
+                <Input
+                    placeholder="Last name"
+                    leftIcon={
+                        <Icon
+                            name="account-circle"
+                            size={24}
+                            color="#5f6368"
+                            type="material"
+                        />
+                    }
+                    value={lastname}
+                    onChangeText={setLastname}
+                    autoCapitalize="none"
+                />
+                <Input
                     placeholder="Email"
                     leftIcon={
                         <Icon
-                            name="user"
+                            name="mail"
                             size={24}
-                            color="black"
-                            type="evilicon"
+                            color="#5f6368"
+                            type="material"
                         />
                     }
                     value={email}
@@ -90,10 +120,10 @@ const RegisterScreen = ({ navigation }) => {
                     placeholder="Password"
                     leftIcon={
                         <Icon
-                            name="unlock"
+                            name="lock"
                             size={24}
-                            color="black"
-                            type="evilicon"
+                            color="#5f6368"
+                            type="material"
                         />
                     }
                     value={password}
@@ -105,10 +135,10 @@ const RegisterScreen = ({ navigation }) => {
                     placeholder="Password again"
                     leftIcon={
                         <Icon
-                            name="unlock"
+                            name="lock"
                             size={24}
-                            color="black"
-                            type="evilicon"
+                            color="#5f6368"
+                            type="material"
                         />
                     }
                     value={passwordAgain}
