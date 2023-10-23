@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { Icon } from "@rneui/themed";
 
 // navigators
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -27,8 +28,38 @@ const MainBottomTab = createBottomTabNavigator();
 
 const AuthedFlow = () => (
     <MainBottomTab.Navigator screenOptions={defaultBottomTabOptions}>
-        <rootStack.Screen name="Home" component={HomeScreen} />
-        <rootStack.Screen name="TracksFlow" component={TracksFlow} />
+        <rootStack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{
+                tabBarLabel: "Tracks",
+                tabBarIcon: ({ color, size }) => (
+                    <Icon
+                        name="public"
+                        size={30}
+                        color={color}
+                        type="material"
+                        style={{ marginBottom: 20 }}
+                    />
+                ),
+            }}
+        />
+        <rootStack.Screen
+            name="TracksFlow"
+            component={TracksFlow}
+            options={{
+                tabBarLabel: "Profile",
+                tabBarIcon: ({ color, size }) => (
+                    <Icon
+                        name="account-circle"
+                        size={30}
+                        color={color}
+                        type="material"
+                        style={{ marginBottom: 20 }}
+                    />
+                ),
+            }}
+        />
     </MainBottomTab.Navigator>
 );
 
