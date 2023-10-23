@@ -34,7 +34,13 @@ const RegisterScreen = ({ navigation }) => {
 
     const onClickHandler = async () => {
         setLoading(true);
-        await registerAction({ email, password, passwordAgain });
+        await registerAction({
+            email,
+            password,
+            passwordAgain,
+            firstname,
+            lastname,
+        });
         setLoading(false);
     };
 

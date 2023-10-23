@@ -61,12 +61,13 @@ const registerAction = (dispatch) => {
         if (
             payload.email === "" ||
             payload.password === "" ||
+            payload.passwordAgain === "" ||
             payload.firstname === "" ||
             payload.lastname === ""
         ) {
             dispatch({
                 type: "REGISTER_ERROR",
-                payload: { register_error: "Some field(s) is empty." },
+                payload: { register_error: "Please fill in all fields." },
             });
         } else if (payload.password !== payload.passwordAgain) {
             dispatch({
@@ -79,16 +80,16 @@ const registerAction = (dispatch) => {
             if (typeof result === "object") {
                 dispatch({
                     type: "REGISTER",
-                    payload: { jwt: result.jwt, email: payload.email },
+                    payload: {
+                        jwt: result.jwt,
+                        email: payload.email,
+                        firstname: payload.firstname,
+                        lastname: payload.lastname,
+                    },
                 });
                 await AsyncStorage.setItem("app-maps-jwt", result.jwt);
                 await AsyncStorage.setItem("app-maps-email", payload.email);
             } else {
-                if (result.includes("401")) {
-                    result = "Wrong email/password.";
-                } else {
-                    result = "Server error.";
-                }
                 dispatch({
                     type: "ERROR",
                     payload: { error: result },
