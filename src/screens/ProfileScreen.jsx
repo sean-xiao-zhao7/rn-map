@@ -1,7 +1,8 @@
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { View, Text } from "react-native";
+import { View } from "react-native";
+import { Text } from "@rneui/themed";
 
-const HomeScreen = () => {
+const ProfileScreen = () => {
     const insets = useSafeAreaInsets();
 
     return (
@@ -19,9 +20,9 @@ const HomeScreen = () => {
                 backgroundColor: "white",
             }}
         >
-            <Text>Tracks App</Text>
+            <Text h4>Profile flow</Text>
         </View>
     );
 };
 
-export default HomeScreen;
+export default ProfileScreen;

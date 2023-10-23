@@ -1,5 +1,6 @@
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { View, Text } from "react-native";
+import { View } from "react-native";
+import { Text } from "@rneui/themed";
 
 const TracksScreen = () => {
     const insets = useSafeAreaInsets();
@@ -19,7 +20,7 @@ const TracksScreen = () => {
                 backgroundColor: "white",
             }}
         >
-            <Text>Tracks Screen</Text>
+            <Text h4>Tracks App</Text>
         </View>
     );
 };

@@ -9,7 +9,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 // screens
 import LoadingScreen from "./src/screens/utils/LoadingScreen";
-import HomeScreen from "./src/screens/HomeScreen";
+import ProfileScreen from "./src/screens/ProfileScreen";
 import TracksScreen from "./src/screens/TracksScreen";
 import AuthScreen from "./src/screens/AuthScreen";
 import RegisterScreen from "./src/screens/RegisterScreen";
@@ -26,14 +26,23 @@ const rootStack = createStackNavigator();
 const TracksStack = createStackNavigator();
 const MainBottomTab = createBottomTabNavigator();
 
+const TracksFlow = () => (
+    <TracksStack.Navigator
+        screenOptions={defaultOptions}
+        initialRouteName="TracksList"
+    >
+        <TracksStack.Screen name="TracksList" component={TracksScreen} />
+    </TracksStack.Navigator>
+);
+
 const AuthedFlow = () => (
     <MainBottomTab.Navigator
         screenOptions={defaultBottomTabOptions}
         sceneContainerStyle={{ backgroundColor: "white" }}
     >
         <rootStack.Screen
-            name="Home"
-            component={HomeScreen}
+            name="Tracks"
+            component={TracksFlow}
             options={{
                 tabBarLabel: "Tracks",
                 tabBarIcon: ({ color, size }) => (
@@ -48,8 +57,8 @@ const AuthedFlow = () => (
             }}
         />
         <rootStack.Screen
-            name="TracksFlow"
-            component={TracksFlow}
+            name="Profile"
+            component={ProfileScreen}
             options={{
                 tabBarLabel: "Profile",
                 tabBarIcon: ({ color, size }) => (
@@ -65,15 +74,6 @@ const AuthedFlow = () => (
         />
     </MainBottomTab.Navigator>
 );
-
-const TracksFlow = () => {
-    <TracksStack.Navigator
-        screenOptions={defaultOptions}
-        initialRouteName="TracksList"
-    >
-        <TracksStack.Screen name="TracksList" component={TracksScreen} />
-    </TracksStack.Navigator>;
-};
 
 export default function App() {
     const [loading, setLoading] = useState(true);
