@@ -16,6 +16,7 @@ const TracksScreen = () => {
                 paddingBottom: insets.bottom,
                 paddingLeft: insets.left,
                 paddingRight: insets.right,
+                backgroundColor: "white",
             }}
         >
             <Text>Tracks Screen</Text>

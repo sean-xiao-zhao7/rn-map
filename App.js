@@ -58,6 +58,7 @@ const AuthedFlow = () => (
                         style={{ marginBottom: 20 }}
                     />
                 ),
+                ...defaultOptions,
             }}
         />
     </MainBottomTab.Navigator>

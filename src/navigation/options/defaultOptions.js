@@ -8,13 +8,8 @@ export default defaultOptions = {
 
 export const defaultBottomTabOptions = {
     headerShown: false,
-    cardStyle: {
-        backgroundColor: "white",
-        paddingHorizontal: 20,
-    },
     tabBarShowLabel: false,
-    sceneContainerStyle: {
-        margin: 0,
+    tabBarStyle: {
         padding: 0,
     },
 };

@@ -16,6 +16,7 @@ const HomeScreen = () => {
                 paddingBottom: insets.bottom,
                 paddingLeft: insets.left,
                 paddingRight: insets.right,
+                backgroundColor: "white",
             }}
         >
             <Text>Home Screen</Text>
