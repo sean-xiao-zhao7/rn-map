@@ -1,5 +1,5 @@
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { View } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { Text, Input, Icon, Button, Dialog } from "@rneui/themed";
 import { useContext, useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
@@ -94,6 +94,14 @@ const AuthScreen = ({ navigation }) => {
                 />
                 <Button size="lg" onPress={onClickHandler} loading={loading}>
                     Login
+                </Button>
+                <Button
+                    size="lg"
+                    onPress={() => navigation.navigate("Register")}
+                    loading={loading}
+                    style={{ marginTop: 15 }}
+                >
+                    Register
                 </Button>
             </View>
         </View>
