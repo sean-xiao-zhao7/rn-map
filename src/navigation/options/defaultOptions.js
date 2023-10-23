@@ -10,18 +10,26 @@ export const defaultBottomTabOptions = {
     headerShown: false,
     // tabBarShowLabel: false,
     tabBarStyle: {
-        paddingTop: 10,
-        height: 120,
+        // backgroundColor: "blue",
+        height: 80,
+        borderTopWidth: 0,
+        marginBottom: 40,
+    },
+    tabBarItemStyle: {
+        // backgroundColor: "orange",
+        height: 80,
+        marginBottom: 40,
     },
     tabBarActiveTintColor: "teal",
     tabBarInactiveTintColor: "#ccc",
-    tabBarLabelPosition: "beside-icon",
+    // tabBarLabelPosition: "beside-icon",
     tabBarLabelStyle: {
-        fontSize: 18,
+        fontSize: 16,
+        fontWeight: "bold",
+        // backgroundColor: "orange",
     },
     tabBarIconStyle: {
-        width: 50,
-        height: 60,
+        paddingBottom: 0,
         // backgroundColor: "green",
     },
 };

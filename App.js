@@ -27,7 +27,10 @@ const TracksStack = createStackNavigator();
 const MainBottomTab = createBottomTabNavigator();
 
 const AuthedFlow = () => (
-    <MainBottomTab.Navigator screenOptions={defaultBottomTabOptions}>
+    <MainBottomTab.Navigator
+        screenOptions={defaultBottomTabOptions}
+        sceneContainerStyle={{ backgroundColor: "white" }}
+    >
         <rootStack.Screen
             name="Home"
             component={HomeScreen}
@@ -64,7 +67,10 @@ const AuthedFlow = () => (
 );
 
 const TracksFlow = () => {
-    <TracksStack.Navigator screenOptions={defaultOptions}>
+    <TracksStack.Navigator
+        screenOptions={defaultOptions}
+        initialRouteName="TracksList"
+    >
         <TracksStack.Screen name="TracksList" component={TracksScreen} />
     </TracksStack.Navigator>;
 };
@@ -99,6 +105,9 @@ export default function App() {
                         <rootStack.Screen
                             name="AuthedFlow"
                             component={AuthedFlow}
+                            options={{
+                                backgroundColor: "orange",
+                            }}
                         />
                     </rootStack.Navigator>
                 </AuthProvider>
