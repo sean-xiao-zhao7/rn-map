@@ -17,7 +17,7 @@ export const apiRequest = async (uri, type, payload) => {
                 });
                 break;
             default:
-                break;
+                throw new Error("Type not supported error");
         }
         return result.data;
     } catch (err) {

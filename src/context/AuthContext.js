@@ -71,11 +71,14 @@ const loginAction = (dispatch) => {
                     payload: { jwt: result.jwt, email: payload.email },
                 });
                 await AsyncStorage.setItem("app-maps-jwt", result.jwt);
+                await AsyncStorage.setItem("app-maps-email", result.email);
             } else {
                 if (result.includes("401")) {
                     result = "Wrong email/password.";
                 } else if (result.includes("404")) {
                     result = "Email is not registered.";
+                } else {
+                    result = "Server error.";
                 }
                 dispatch({
                     type: "ERROR",
