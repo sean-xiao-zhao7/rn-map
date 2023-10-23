@@ -25,7 +25,7 @@ const RegisterScreen = ({ navigation }) => {
 
     useEffect(() => {
         if (state.authStatus) {
-            navigation.navigate("Home");
+            navigation.navigate("AuthedFlow", { screen: "Home" });
         } else if (state.register_error) {
             setError(state.register_error);
             setDialogVisible(true);

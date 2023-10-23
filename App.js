@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 // navigators
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 // screens
 import LoadingScreen from "./src/screens/utils/LoadingScreen";
@@ -19,6 +20,14 @@ import defaultOptions from "./src/navigation/options/defaultOptions";
 import { Provider as AuthProvider } from "./src/context/AuthContext";
 
 const rootStack = createStackNavigator();
+const MainBottomTab = createBottomTabNavigator();
+
+const AuthedFlow = () => (
+    <MainBottomTab.Navigator screenOptions={defaultOptions}>
+        <rootStack.Screen name="Home" component={HomeScreen} />
+        <rootStack.Screen name="Tracks" component={TracksScreen} />
+    </MainBottomTab.Navigator>
+);
 
 export default function App() {
     const [loading, setLoading] = useState(true);
@@ -47,10 +56,9 @@ export default function App() {
                             name="Register"
                             component={RegisterScreen}
                         />
-                        <rootStack.Screen name="Home" component={HomeScreen} />
                         <rootStack.Screen
-                            name="Tracks"
-                            component={TracksScreen}
+                            name="AuthedFlow"
+                            component={AuthedFlow}
                         />
                     </rootStack.Navigator>
                 </AuthProvider>
