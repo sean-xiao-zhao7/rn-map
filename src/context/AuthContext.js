@@ -71,7 +71,7 @@ const loginAction = (dispatch) => {
                     payload: { jwt: result.jwt, email: payload.email },
                 });
                 await AsyncStorage.setItem("app-maps-jwt", result.jwt);
-                await AsyncStorage.setItem("app-maps-email", result.email);
+                await AsyncStorage.setItem("app-maps-email", payload.email);
             } else {
                 if (result.includes("401")) {
                     result = "Wrong email/password.";
