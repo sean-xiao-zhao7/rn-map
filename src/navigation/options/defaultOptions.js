@@ -2,7 +2,7 @@ export default defaultOptions = {
     headerShown: false,
     cardStyle: {
         backgroundColor: "white",
-        paddingHorizontal: 10,
+        // paddingHorizontal: 10,
     },
 };
 

@@ -18,6 +18,7 @@ import RegisterScreen from "./src/screens/RegisterScreen";
 import defaultOptions, {
     defaultBottomTabOptions,
 } from "./src/navigation/options/defaultOptions";
+import { authOptions } from "./src/navigation/options/authOptions";
 
 // context
 import { Provider as AuthProvider } from "./src/context/AuthContext";
@@ -97,10 +98,15 @@ export default function App() {
             <NavigationContainer>
                 <AuthProvider>
                     <rootStack.Navigator screenOptions={defaultOptions}>
-                        <rootStack.Screen name="Auth" component={AuthScreen} />
+                        <rootStack.Screen
+                            name="Auth"
+                            component={AuthScreen}
+                            options={authOptions}
+                        />
                         <rootStack.Screen
                             name="Register"
                             component={RegisterScreen}
+                            options={authOptions}
                         />
                         <rootStack.Screen
                             name="AuthedFlow"
