@@ -1,7 +1,7 @@
 import { base } from "../../a.js";
 import axios from "axios";
 
-export const apiRequest = async (uri, type, payload) => {
+export const apiRequest = async (uri, type, payload, jwt = "") => {
     try {
         const url = base + uri;
         let result;
@@ -10,10 +10,14 @@ export const apiRequest = async (uri, type, payload) => {
                 result = await axios.get(url);
                 break;
             case "post":
+                let headers = {
+                    "Content-Type": "application/json",
+                };
+                if (jwt !== "") {
+                    headers["Authorization"] = `Bearer ${jwt}`;
+                }
                 result = await axios.post(url, payload, {
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
+                    headers,
                 });
                 break;
             default:
