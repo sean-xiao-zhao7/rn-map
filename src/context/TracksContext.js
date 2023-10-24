@@ -37,26 +37,27 @@ const tracksReducer = (state, action) => {
 // actions
 const addTrackAction = (dispatch) => {
     return async (payload) => {
-        if (payload.email === "" || payload.password === "") {
+        if (payload.name === "" || payload.lat === "" || payload.long === "") {
             dispatch({
                 type: "ERROR",
-                payload: { error: "Email/password is empty." },
+                payload: { error: "Some required field(s) is empty." },
             });
         } else {
-            let result = await apiRequest("/login", "post", payload);
+            let result = await apiRequest("/add-trip", "post", payload);
 
             if (typeof result === "object") {
                 dispatch({
-                    type: "LOGIN",
-                    payload: { jwt: result.jwt, email: payload.email },
+                    type: "ADD_TRACK",
+                    payload: {
+                        tripId: result.tripId,
+                        name: payload.name,
+                        lat: payload.lat,
+                        long: payload.long,
+                    },
                 });
-                await AsyncStorage.setItem("app-maps-jwt", result.jwt);
-                await AsyncStorage.setItem("app-maps-email", payload.email);
             } else {
                 if (result.includes("401")) {
-                    result = "Wrong email/password.";
-                } else if (result.includes("404")) {
-                    result = "Email is not registered.";
+                    result = "Not authorized.";
                 } else {
                     result = "Server error.";
                 }
@@ -78,6 +79,7 @@ const clearErrorAction = (dispatch) => {
 export const { Context, Provider } = createDataContext(
     tracksReducer,
     {
+        addTrackAction,
         clearErrorAction,
     },
     {
