@@ -1,5 +1,3 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-
 import createDataContext from "./createDataContext";
 import { apiRequest } from "./apiRequest";
 
@@ -18,6 +16,11 @@ const tracksReducer = (state, action) => {
                     ...state.tracks,
                     tripId: newTrack,
                 },
+            };
+        case "GET_TRACKs":
+            return {
+                ...state,
+                tracks: action.payload.tracks,
             };
         case "ERROR":
             return {
@@ -70,6 +73,30 @@ const addTrackAction = (dispatch) => {
     };
 };
 
+const getTracksAction = (dispatch) => {
+    return async () => {
+        let result = await apiRequest("/get-trips", "get");
+        if (typeof result === "object") {
+            dispatch({
+                type: "GET_TRACKS",
+                payload: {
+                    tracks: result,
+                },
+            });
+        } else {
+            if (result.includes("401")) {
+                result = "Not authorized.";
+            } else {
+                result = "Server error.";
+            }
+            dispatch({
+                type: "ERROR",
+                payload: { error: result },
+            });
+        }
+    };
+};
+
 const clearErrorAction = (dispatch) => {
     return () => {
         dispatch({ type: "CLEAR_ERROR" });
@@ -80,6 +107,7 @@ export const { Context, Provider } = createDataContext(
     tracksReducer,
     {
         addTrackAction,
+        getTracksAction,
         clearErrorAction,
     },
     {
