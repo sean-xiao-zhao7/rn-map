@@ -26,7 +26,7 @@ tripsRoutes.post("/add-trip", async (req, res) => {
         await newCoordinate.save();
 
         res.status = 200;
-        res.send({ message: "New trip added." });
+        res.send({ message: "New trip added.", tripId: newTrip._id });
     } catch (error) {
         console.log(error);
         if (error.message.includes("is required")) {

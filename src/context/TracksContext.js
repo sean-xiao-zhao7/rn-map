@@ -7,12 +7,16 @@ import { apiRequest } from "./apiRequest";
 const tracksReducer = (state, action) => {
     switch (action.type) {
         case "ADD_TRACK":
+            const newTrack = {
+                tripId: action.payload.tripId,
+                name: action.payload.name,
+                coordinates: [action.payload.initialCoordinates],
+            };
             return {
                 ...state,
-                authStatus: "registered",
-                user: {
-                    email: action.payload.email,
-                    jwt: action.payload.jwt,
+                tracks: {
+                    ...state.tracks,
+                    tripId: newTrack,
                 },
             };
         case "ERROR":
