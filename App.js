@@ -39,12 +39,14 @@ const TracksFlow = () => (
             component={AddTrackScreen}
             options={{
                 presentation: "transparentModal",
-                headerShown: true,
+                // headerShown: true,
                 cardOverlayEnabled: true,
                 cardStyle: {
-                    marginHorizontal: 15,
-                    marginTop: 50,
+                    marginHorizontal: 20,
+                    marginTop: 60,
                     backgroundColor: "white",
+                    borderTopRightRadius: 5,
+                    borderTopLeftRadius: 5,
                 },
             }}
         />

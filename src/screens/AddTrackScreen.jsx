@@ -1,12 +1,19 @@
 import { Text } from "@rneui/themed";
-import { ScrollView } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 
-const TracksScreen = () => {
+const TracksScreen = ({ navigation }) => {
     return (
-        <ScrollView>
-            <Text h3>Add a new track</Text>
+        <ScrollView contentContainerStyle={style.scrollView}>
+            <Text h4>Add a new track</Text>
+            <View></View>
         </ScrollView>
     );
 };
+
+const style = StyleSheet.create({
+    scrollView: {
+        padding: 15,
+    },
+});
 
 export default TracksScreen;
