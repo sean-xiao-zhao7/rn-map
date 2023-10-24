@@ -4,7 +4,7 @@ import { Text, Input, Icon, Button, Dialog } from "@rneui/themed";
 import { useContext, useEffect, useState } from "react";
 import MapView, { Polyline } from "react-native-maps";
 
-const TracksScreen = () => {
+const TracksScreen = ({ navigation }) => {
     const insets = useSafeAreaInsets();
     const [loading, setLoading] = useState(false);
 
@@ -12,7 +12,8 @@ const TracksScreen = () => {
         setLoading(true);
         setTimeout(() => {
             setLoading(false);
-        }, 1000);
+        }, 100);
+        navigation.navigate("Tracks", { screen: "AddTrack" });
     };
 
     return (

@@ -11,6 +11,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import LoadingScreen from "./src/screens/utils/LoadingScreen";
 import ProfileScreen from "./src/screens/ProfileScreen";
 import TracksScreen from "./src/screens/TracksScreen";
+import AddTrackScreen from "./src/screens/AddTrackScreen";
 import AuthScreen from "./src/screens/AuthScreen";
 import RegisterScreen from "./src/screens/RegisterScreen";
 
@@ -33,6 +34,20 @@ const TracksFlow = () => (
         initialRouteName="TracksList"
     >
         <TracksStack.Screen name="TracksList" component={TracksScreen} />
+        <TracksStack.Screen
+            name="AddTrack"
+            component={AddTrackScreen}
+            options={{
+                presentation: "transparentModal",
+                headerShown: true,
+                cardOverlayEnabled: true,
+                cardStyle: {
+                    marginHorizontal: 15,
+                    marginTop: 50,
+                    backgroundColor: "white",
+                },
+            }}
+        />
     </TracksStack.Navigator>
 );
 
